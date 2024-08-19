@@ -1,4 +1,4 @@
-"use client";
+
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -8,21 +8,12 @@ export default function AddHabitPage() {
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false); // Estado de carga
   const [error, setError] = useState<string | null>(null); // Estado de error
-  const [success, setSuccess] = useState<string | null>(null); // Estado de éxito
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setSuccess(null);
-
-    // Validación básica
-    if (title.length < 3 || description.length < 5) {
-      setError('El título debe tener al menos 3 caracteres y la descripción al menos 5.');
-      setLoading(false);
-      return;
-    }
 
     try {
       const res = await fetch('/api/habits', {
@@ -34,18 +25,13 @@ export default function AddHabitPage() {
       });
 
       if (res.ok) {
-        setSuccess('Hábito añadido exitosamente.');
-        setTitle('');
-        setDescription('');
-        setTimeout(() => {
-          router.push('/habits');
-        }, 1500); // Redirecciona después de 1.5 segundos
+        router.push('/habits');
       } else {
-        setError('Hubo un error al añadir el hábito.');
+        setError('Failed to add habit.');
       }
     } catch (error) {
       console.error('Error:', error);
-      setError('Ocurrió un error. Por favor, intenta nuevamente.');
+      setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -55,7 +41,6 @@ export default function AddHabitPage() {
     <div className="max-w-md mx-auto">
       <h1 className="text-2xl font-bold mb-4">Añadir Nuevo Hábito</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
-      {success && <p className="text-green-500 mb-4">{success}</p>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700">Título</label>
@@ -63,9 +48,8 @@ export default function AddHabitPage() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 border rounded text-black"
+            className="w-full p-2 border rounded text-black" // Clase text-black
             required
-            disabled={loading}
           />
         </div>
         <div className="mb-4">
@@ -73,15 +57,14 @@ export default function AddHabitPage() {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-2 border rounded text-black"
+            className="w-full p-2 border rounded text-black" // Clase text-black
             required
-            disabled={loading}
           />
         </div>
         <button
           type="submit"
           className="bg-blue-500 text-white py-2 px-4 rounded"
-          disabled={loading}
+          disabled={loading} // Deshabilita el botón mientras está cargando
         >
           {loading ? 'Añadiendo...' : 'Añadir Hábito'}
         </button>
@@ -89,7 +72,6 @@ export default function AddHabitPage() {
           type="button"
           className="bg-gray-500 text-white py-2 px-4 rounded ml-4"
           onClick={() => router.push('/habits')}
-          disabled={loading}
         >
           Volver
         </button>

@@ -2,10 +2,11 @@ import mongoose from 'mongoose';
 
 const HabitSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  description: String,
-  frequency: { type: String, required: true }, // daily, weekly, etc.
-  completedDates: [Date],
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  description: { type: String, required: true },
+  frequency: { type: String, required: false },
+  progress: { type: Number, default: 0 }, // Asegúrate de que este campo esté presente
 });
 
-export default mongoose.models.Habit || mongoose.model('Habit', HabitSchema);
+const Habit = mongoose.models.Habit || mongoose.model('Habit', HabitSchema);
+export default Habit;
+

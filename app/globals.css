@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0; 
-  --background-start-rgb: 245, 245, 245; 
-  --background-end-rgb: 255, 255, 255; 
+  --foreground-rgb: 255, 255, 255; /* Texto blanco */
+  --background-start-rgb: 173, 216, 230; /* Azul celeste claro */
+  --background-end-rgb: 255, 182, 193; /* Rojo claro (rosado) */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255; 
-    --background-start-rgb: 18, 18, 18; 
-    --background-end-rgb: 48, 48, 48; 
+    --foreground-rgb: 255, 255, 255; /* Texto blanco */
+    --background-start-rgb: 100, 149, 237; /* Azul más oscuro */
+    --background-end-rgb: 255, 105, 180; /* Rosado fuerte */
   }
 }
 
@@ -34,3 +34,4 @@ body {
     text-wrap: balance;
   }
 }
+

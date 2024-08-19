@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'; 
-import HabitList from '../../components/HabitList';
-import { Habit } from '../../types';
+import HabitList from '@/components/HabitList';
+import { Habit } from '@/types'; 
 
 export default function HabitsPage() {
   const [habits, setHabits] = useState<Habit[]>([]);
@@ -31,13 +31,8 @@ export default function HabitsPage() {
       });
 
       if (res.ok) {
-        const updatedHabits = habits.map((habit) => {
-          if (habit._id === id) {
-            return { ...habit, progress: habit.progress + 1 };
-          }
-          return habit;
-        });
-
+        // Aquí se usa el array 'habits', no el modelo 'Habit'
+        const updatedHabits = habits.filter((habit) => habit._id !== id);
         setHabits(updatedHabits);
       } else {
         setError('Hubo un problema al completar el hábito.');
