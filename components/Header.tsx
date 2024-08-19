@@ -1,17 +1,24 @@
+import React from 'react';
 import Link from 'next/link';
 
-export default function Header() {
+interface HeaderProps {
+  className?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ className }) => {
   return (
-    <header className="bg-blue-500 p-4 text-white">
+    <header className={`bg-blue-500 p-4 text-white ${className}`}>
       <h1 className="text-2xl font-bold">Habit Tracker</h1>
-      <nav>
+      <nav className="mt-2 space-x-4">
         <Link href="/habits">
-          <a className="mr-4">Mis Hábitos</a>
+          Mis Hábitos
         </Link>
         <Link href="/profile">
-          <a>Perfil</a>
+          Perfil
         </Link>
       </nav>
     </header>
   );
-}
+};
+
+export default Header;

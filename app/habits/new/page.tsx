@@ -1,31 +1,81 @@
-import { useRouter } from 'next/router';
-import HabitForm from '@/components/HabitForm';
+"use client";
 
-export default function NewHabit() {
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function AddHabitPage() {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(false); // Estado de carga
+  const [error, setError] = useState<string | null>(null); // Estado de error
   const router = useRouter();
 
-  const addHabit = async (habit: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    
     try {
       const res = await fetch('/api/habits', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(habit),
+        body: JSON.stringify({ title, description }),
       });
 
       if (res.ok) {
         router.push('/habits');
+      } else {
+        setError('Failed to add habit.');
       }
     } catch (error) {
-      console.error('Error adding the habit:', error);
+      console.error('Error:', error);
+      setError('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-center my-8">Agregar Nuevo Hábito</h1>
-      <HabitForm onSubmit={addHabit} />
+    <div className="max-w-md mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Añadir Nuevo Hábito</h1>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block text-gray-700">Título</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">Descripción</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded"
+          disabled={loading} // Deshabilita el botón mientras está cargando
+        >
+          {loading ? 'Añadiendo...' : 'Añadir Hábito'}
+        </button>
+        <button
+          type="button"
+          className="bg-gray-500 text-white py-2 px-4 rounded ml-4"
+          onClick={() => router.push('/habits')}
+        >
+          Volver
+        </button>
+      </form>
     </div>
   );
 }
