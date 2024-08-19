@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-export default function HabitForm({ onSubmit }) {
+export default function HabitForm({ onSubmit }: { onSubmit: any }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [frequency, setFrequency] = useState('daily');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit({ title, description, frequency });
     setTitle('');

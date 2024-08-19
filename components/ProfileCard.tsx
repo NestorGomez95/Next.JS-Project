@@ -1,4 +1,4 @@
-export default function ProfileCard({ user }) {
+export default function ProfileCard({ user }: { user: any }) {
     return (
       <div className="bg-white p-4 rounded shadow-md text-center">
         <img

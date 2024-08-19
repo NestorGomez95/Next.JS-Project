@@ -1,6 +1,7 @@
+import { HabitCardProps } from '../types'; 
 import ProgressBar from './ProgressBar';
 
-export default function HabitCard({ habit, onMarkComplete }) {
+export default function HabitCard({ habit, onMarkComplete }: HabitCardProps) {
   return (
     <div className="bg-gray-100 p-4 mb-4 rounded shadow-md">
       <h3 className="text-xl font-bold">{habit.title}</h3>

@@ -1,6 +1,12 @@
 import HabitCard from './HabitCard';
+import { Habit } from '../types'; 
 
-export default function HabitList({ habits, onMarkComplete }) {
+interface HabitListProps {
+  habits: Habit[];
+  onMarkComplete: (id: string) => void;
+}
+
+export default function HabitList({ habits, onMarkComplete }: HabitListProps) {
   return (
     <div className="max-w-lg mx-auto mt-8">
       {habits.length > 0 ? (
@@ -13,3 +19,4 @@ export default function HabitList({ habits, onMarkComplete }) {
     </div>
   );
 }
+
