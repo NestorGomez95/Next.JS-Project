@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import HabitCard from '../../components/HabitCard';
+import HabitCard from '@/components/HabitCard';
 
 export default function HabitDetail() {
   const router = useRouter();
@@ -9,7 +9,7 @@ export default function HabitDetail() {
 
   useEffect(() => {
     if (id) {
-      async function fetchHabit() {
+      const fetchHabit = async () => {
         try {
           const res = await fetch(`/api/habits/${id}`);
           const data = await res.json();

@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import HabitForm from '../../components/HabitForm';
+import HabitForm from '@/components/HabitForm';
 
 export default function NewHabit() {
   const router = useRouter();
 
-  const addHabit = async (habit) => {
+  const addHabit = async (habit: any) => {
     try {
       const res = await fetch('/api/habits', {
         method: 'POST',

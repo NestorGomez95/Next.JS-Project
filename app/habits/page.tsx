@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import HabitList from '../../components/HabitList';
+import { Habit } from '../../types'; 
 
 export default function HabitsPage() {
-  const [habits, setHabits] = useState([]);
+  const [habits, setHabits] = useState<Habit[]>([]);
 
   useEffect(() => {
     async function fetchHabits() {
@@ -17,7 +18,7 @@ export default function HabitsPage() {
     fetchHabits();
   }, []);
 
-  const markHabitAsComplete = async (id) => {
+  const markHabitAsComplete = async (id: any) => {
     try {
       const res = await fetch(`/api/habits/${id}/complete`, {
         method: 'PUT',
