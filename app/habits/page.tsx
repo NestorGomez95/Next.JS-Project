@@ -17,8 +17,8 @@ export default function HabitsPage() {
         const data = await res.json();
         setHabits(data.habits);
       } catch (error) {
-        console.error('Error al obtener los hábitos:', error);
-        setError('Hubo un problema al obtener los hábitos.');
+        console.error('Error getting the habits:', error);
+        setError('there was an error getting the errors.');
       }
     }
     fetchHabits();
@@ -31,29 +31,29 @@ export default function HabitsPage() {
       });
 
       if (res.ok) {
-        // Aquí se usa el array 'habits', no el modelo 'Habit'
+        
         const updatedHabits = habits.filter((habit) => habit._id !== id);
         setHabits(updatedHabits);
       } else {
-        setError('Hubo un problema al completar el hábito.');
+        setError('there was an error completing the errors.');
       }
     } catch (error) {
-      console.error('Error al completar el hábito:', error);
-      setError('Hubo un problema al completar el hábito.');
+      console.error('Error completing the habit:', error);
+      setError('Error completing the habit.');
     }
   };
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-center my-8">Mis Hábitos</h1>
+      <h1 className="text-2xl font-bold text-center my-8">My habits</h1>
       {error && <p className="text-red-500 text-center">{error}</p>}
       <div className="flex justify-between items-center mb-4">
-        <p className="text-lg">Lista de hábitos:</p>
+        <p className="text-lg">Habits List</p>
         <button
           className="bg-blue-500 text-white py-2 px-4 rounded"
           onClick={() => router.push('/habits/new')}
         >
-          Añadir Hábito
+          Adding habit
         </button>
       </div>
       <HabitList habits={habits} onMarkComplete={markHabitAsComplete} />

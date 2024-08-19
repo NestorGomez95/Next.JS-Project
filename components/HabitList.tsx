@@ -8,7 +8,7 @@ interface HabitListProps {
 
 export default function HabitList({ habits, onMarkComplete }: HabitListProps) {
   if (!habits || habits.length === 0) {
-    return <p className="text-center text-gray-500">No tienes hábitos aún.</p>;
+    return <p className="text-center text-gray-500">You don't have any habits yet.</p>;
   }
 
   return (

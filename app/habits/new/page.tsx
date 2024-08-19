@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation';
 export default function AddHabitPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [loading, setLoading] = useState(false); // Estado de carga
-  const [error, setError] = useState<string | null>(null); // Estado de error
-  const [success, setSuccess] = useState<string | null>(null); // Estado de éxito
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState<string | null>(null); 
+  const [success, setSuccess] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,7 +19,7 @@ export default function AddHabitPage() {
 
     // Validación básica
     if (title.length < 3 || description.length < 5) {
-      setError('El título debe tener al menos 3 caracteres y la descripción al menos 5.');
+      setError('The title has to have at least 3 characters and the description at least 5.');
       setLoading(false);
       return;
     }
@@ -34,18 +34,18 @@ export default function AddHabitPage() {
       });
 
       if (res.ok) {
-        setSuccess('Hábito añadido exitosamente.');
+        setSuccess('Habit added succesfully.');
         setTitle('');
         setDescription('');
         setTimeout(() => {
           router.push('/habits');
-        }, 1500); // Redirecciona después de 1.5 segundos
+        }, 1500); 
       } else {
-        setError('Hubo un error al añadir el hábito.');
+        setError('Error adding the habit.');
       }
     } catch (error) {
       console.error('Error:', error);
-      setError('Ocurrió un error. Por favor, intenta nuevamente.');
+      setError('There was an error. Please, try again.');
     } finally {
       setLoading(false);
     }
@@ -53,12 +53,12 @@ export default function AddHabitPage() {
 
   return (
     <div className="max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Añadir Nuevo Hábito</h1>
+      <h1 className="text-2xl font-bold mb-4">Adding new habit</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {success && <p className="text-green-500 mb-4">{success}</p>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-gray-700">Título</label>
+          <label className="block text-gray-700">Title</label>
           <input
             type="text"
             value={title}
@@ -69,7 +69,7 @@ export default function AddHabitPage() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">Descripción</label>
+          <label className="block text-gray-700">Description</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -83,7 +83,7 @@ export default function AddHabitPage() {
           className="bg-blue-500 text-white py-2 px-4 rounded"
           disabled={loading}
         >
-          {loading ? 'Añadiendo...' : 'Añadir Hábito'}
+          {loading ? 'Adding...' : 'Adding habit'}
         </button>
         <button
           type="button"

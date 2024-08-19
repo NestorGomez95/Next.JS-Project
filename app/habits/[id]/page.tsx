@@ -22,11 +22,11 @@ export default function HabitDetail() {
     }
   }, [id]);
 
-  if (!habit) return <p>Cargando...</p>;
+  if (!habit) return <p>Loading...</p>;
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-center my-8">Detalle del Hábito</h1>
+      <h1 className="text-2xl font-bold text-center my-8">Habit details</h1>
       <HabitCard habit={habit} onMarkComplete={() => {}} />
     </div>
   );
